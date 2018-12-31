@@ -38,7 +38,8 @@
 ```
 ```
 4. 运行效果图：
-![葫芦兄弟](https://github.com/njuzyh/java-2018f-homework/blob/master/Final%20Project/%E5%91%A8%E5%AE%87%E8%88%AA-161220182/finalProject/Calabash.gif?raw=true)
+
+![葫芦兄弟](https://github.com/njuzyh/CalabashBrothers/blob/9f89cf7eb74552efb30d6c9ecc5761d12efbc3c6/finalProject/Calabash.gif?raw=true)
 ```
 ```
  5. 游戏特色
@@ -78,7 +79,8 @@
 -   Enum Color为颜色，用于构造葫芦娃时进行标记。
 -   Interface Queueup为实现摆出阵型的接口，每个阵营类有这个接口，可以摆出相应的阵型。
 
-![Creature](https://github.com/njuzyh/java-2018f-homework/blob/master/Final%20Project/%E5%91%A8%E5%AE%87%E8%88%AA-161220182/finalProject/Creature.PNG?raw=true)
+![Creature](https://github.com/njuzyh/CalabashBrothers/blob/9f89cf7eb74552efb30d6c9ecc5761d12efbc3c6/finalProject/Creature.PNG?raw=true)
+
 4.  #### package Formation
 -   class Formation是一个抽象类，并具有抽象接口用于排列阵型。
 -   class Changshe继承了Formation类，具体实现了长蛇阵法。
@@ -90,7 +92,8 @@
 -   class Yanyue继承了Formation类，具体实现了偃月阵法。
 -   class Yulin继承了Formation类，具体实现了鱼鳞阵法。
 
-![Formation](https://github.com/njuzyh/java-2018f-homework/blob/master/Final%20Project/%E5%91%A8%E5%AE%87%E8%88%AA-161220182/finalProject/Formation.PNG?raw=true)
+![Formation](https://github.com/njuzyh/CalabashBrothers/blob/9f89cf7eb74552efb30d6c9ecc5761d12efbc3c6/finalProject/Formation.PNG?raw=true)
+
 #### package Music
 -   class MusicPlayer使用AudioClip进行音乐读取和播放，并设置循环播放。
 #### package XML
@@ -98,7 +101,8 @@
 -   class FileReader继承XMLFormat类，定义了一些接口，用于BattleField进行文件读取重放。
 -   class FileWriter继承XMLFormat类，定义了一些接口，用于BattleField进行文件记录。
 
-![XMLUML](https://lh3.googleusercontent.com/Ity5aKhyI7Vo0azoNETgbKEEM9eOETfnHgemWCIGSna242DwdY4XkwM4JgxkU_HQXsWw-xgN3Tg "XML")
+![XMLUML](https://github.com/njuzyh/CalabashBrothers/blob/9f89cf7eb74552efb30d6c9ecc5761d12efbc3c6/finalProject/XML.PNG?raw=true)
+
 ### 功能实现
 ####  阵型排列
 -   用户可以通过菜单栏中的按钮布置阵型。用户点击按钮后通过按钮的触发事件处理函数，将生物体排列成相应的阵型。妖精和葫芦娃阵型可以单独排队。
@@ -122,7 +126,7 @@
 ---
 ### 单元测试
 -   使用了JUnit4对Field，Creature等几个模块的部分方法进行了单元测试，内容简单，不详述。
-![JUnit Test](https://picasaweb.google.com/108775974957125167801/6640990382021848593#6640990388168052674 "JUnitTest")
+![JUnit Test](https://github.com/njuzyh/CalabashBrothers/blob/9f89cf7eb74552efb30d6c9ecc5761d12efbc3c6/finalProject/test.PNG?raw=true)
 ---
 ### 设计原则
 #### SRP 单一职责原则
