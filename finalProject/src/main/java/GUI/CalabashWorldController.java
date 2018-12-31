@@ -20,6 +20,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -68,6 +70,8 @@ public class CalabashWorldController implements Initializable {
     @FXML
     private AnchorPane anchorPane;
     @FXML
+    private ImageView background = new ImageView();
+    @FXML
     private MenuItem OpenFile = new MenuItem();
     @FXML
     private MenuItem Restart = new MenuItem();
@@ -75,6 +79,10 @@ public class CalabashWorldController implements Initializable {
     private MenuItem SaveLog = new MenuItem();
     @FXML
     private MenuItem About = new MenuItem();
+    @FXML
+    private MenuItem scene1 = new MenuItem();
+    @FXML
+    private MenuItem scene2 = new MenuItem();
     @FXML
     private MenuItem CalabashFormationChangShe = new MenuItem();
     @FXML
@@ -206,6 +214,18 @@ public class CalabashWorldController implements Initializable {
     }
 
     @FXML
+    public void select1()
+    {
+        background.setImage(new Image("/Image/background.jpg"));
+    }
+
+    @FXML
+    public void select2()
+    {
+        background.setImage(new Image("/Image/background1.jpg"));
+    }
+
+    @FXML
     public void savelog(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("保存记录");
@@ -291,7 +311,6 @@ public class CalabashWorldController implements Initializable {
 
     public void Replay()
     {
-        newBattle = new BattleField(gc, bulletgc);
         newBattle.startReplay(recordReader);
         int roundNum = recordReader.getRoundNum();
         currentRoundNum = 1;

@@ -47,14 +47,20 @@
                         <MenuItem id="FormationYuLin" fx:id="MonsterFormationYuLin" mnemonicParsing="false" onAction="#HeroYuLin" text="鱼鳞" />
                     </items>
                 </Menu>
+                <Menu mnemonicParsing="false" text="关卡">
+                    <items>
+                        <MenuItem fx:id="scene1" mnemonicParsing="false" onAction="#select1" text="葫芦山" />
+                        <MenuItem fx:id="scene2" mnemonicParsing="false" onAction="#select2" text="爷爷山" />
+                    </items>
+                </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem fx:id="About" mnemonicParsing="false" onAction="#about" text="About"  />
+                        <MenuItem fx:id="About" mnemonicParsing="false" onAction="#about" text="About" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
-        <ImageView fitHeight="630.0" fitWidth="600.0" pickOnBounds="true" AnchorPane.topAnchor="20.0">
+        <ImageView fx:id="background" fitHeight="630.0" fitWidth="600.0" pickOnBounds="true" AnchorPane.topAnchor="20.0">
             <image>
                 <Image url="@/Image/background.jpg" />
             </image>

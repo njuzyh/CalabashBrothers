@@ -9,14 +9,16 @@ public class Grandpa extends Creature{
         super(field);
         justice = true;
         name = "爷爷";
-        image = new Image("/Image/grandpa.jpg");
+        this.aliveimage = new Image("/Image/grandpa.jpg");
+        this.image = this.aliveimage;
     }
     public Grandpa(int x, int y, BattleField field)
     {
         super(x, y, field);
         justice = true;
         name = "爷爷";
-        image = new Image("/Image/grandpa.jpg");
+        this.aliveimage = new Image("/Image/grandpa.jpg");
+        this.image = this.aliveimage;
     }
     public Grandpa()
     {

@@ -9,14 +9,16 @@ public class Snake extends Creature{
         super(field);
         justice = false;
         name = "蛇精";
-        image = new Image("/Image/snake.jpg");
+        this.aliveimage = new Image("/Image/snake.jpg");
+        this.image = this.aliveimage;
     }
     public Snake(int x, int y, BattleField field)
     {
         super(x, y, field);
         justice = false;
         name = "蛇精";
-        image = new Image("/Image/snake.jpg");
+        this.aliveimage = new Image("/Image/snake.jpg");
+        this.image = this.aliveimage;
     }
     public Snake()
     {

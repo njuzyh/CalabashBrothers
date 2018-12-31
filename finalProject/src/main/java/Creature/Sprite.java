@@ -11,13 +11,15 @@ public class Sprite extends Creature{
         justice = false;
         order = num;
         name = "喽啰" + order;
-        image = new Image("/Image/louluo.jpg");
+        this.aliveimage = new Image("/Image/louluo.jpg");
+        this.image = this.aliveimage;
     }
     public Sprite(int x, int y, BattleField field, int num) {
         super(x, y, field);
         justice = false;
         order = num;
         name = "喽啰" + order;
-        image = new Image("/Image/sprite.jpg");
+        this.aliveimage = new Image("/Image/louluo.jpg");
+        this.image = this.aliveimage;
     }
 }

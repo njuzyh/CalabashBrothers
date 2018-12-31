@@ -9,12 +9,15 @@ public class Scorpion extends Creature{
         justice = false;
         name = "蝎子精";
         image = new Image("/Image/scorpion.jpg");
+        this.aliveimage = new Image("/Image/scorpion.jpg");
+        this.image = this.aliveimage;
     }
     public Scorpion(int x, int y, BattleField field) {
         super(x, y, field);
         justice = false;
         name = "蝎子精";
-        image = new Image("/Image/scorpion.jpg");
+        this.aliveimage = new Image("/Image/scorpion.jpg");
+        this.image = this.aliveimage;
     }
     public Scorpion()
     {

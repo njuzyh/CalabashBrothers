@@ -15,7 +15,8 @@ public class CalabashBoy extends Creature{
         this.name=color.getName();
         this.color=color;
         this.order=color.ordinal() + 1;
-        this.image = new Image("/Image/brother" + order + ".jpg");
+        this.aliveimage = new Image("/Image/brother" + order + ".jpg");
+        this.image = this.aliveimage;
     }
     CalabashBoy(Color color)
     {

@@ -1,4 +1,5 @@
 package Field;
+import Annotation.Author;
 import Creature.*;
 import Formation.*;
 import GUI.CalabashWorldController;
@@ -13,6 +14,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+@Author()
 public class BattleField {
     private BattleMap<Creature> battleMap;
     private Heroes allheroes;
@@ -61,7 +63,7 @@ public class BattleField {
             executor.execute(x);
         }
     }
-    public void clearUnit(Creature temp)
+    public synchronized void clearUnit(Creature temp)
     {
         battleMap.cleanOneUnit(temp.getX(), temp.getY());
         final int Y = temp.getY();
@@ -97,7 +99,7 @@ public class BattleField {
         allmonsters.show(battleMap);
         battleMap.showGUIMap(gc, bulletgc);
     }
-    public void displayUnit(Creature temp)
+    public synchronized void displayUnit(Creature temp)
     {
         battleMap.setBattleCreature(temp.getX(), temp.getY(), temp);
         final Image image = temp.getImage();
@@ -108,7 +110,7 @@ public class BattleField {
         else
             Platform.runLater(() -> gc.drawImage(image, Y * 30, X * 30, 30, 30));
     }
-    public void updateCreatures()
+    public synchronized void updateCreatures()
     {
         ArrayList<Creature> temp = new ArrayList<Creature>();
         temp.add(allheroes.getGrandfather());
@@ -140,7 +142,7 @@ public class BattleField {
     {
         return allmonsters;
     }
-    public BattleMap getbattleMap()
+    public synchronized BattleMap getbattleMap()
     {
         return battleMap;
     }
@@ -153,7 +155,7 @@ public class BattleField {
         this.recordWriter = recordWriter;
         recordWriter.initalRecord(this);
     }
-    public void addRecord(int n)
+    public synchronized void addRecord(int n)
     {
         recordWriter.addRecord(this, n);
     }
@@ -168,6 +170,10 @@ public class BattleField {
     }
     public void startReplay(FileReader recordReader){
         cleanBattle();
+        for (Creature x:allcreatures) {
+            if(!x.isAlive())
+                x.revive();
+        }
         recordReader.initCreature(this);
         displayGUIBattle();
     }

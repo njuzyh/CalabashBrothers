@@ -1,5 +1,6 @@
-﻿Java大作业实验报告
----
+﻿# Java大作业实验报告
+## 一、游戏简介
+
 ***葫芦娃救爷爷***
 ---
 1. 游戏背景
@@ -37,7 +38,132 @@
 ```
 ```
 4. 运行效果图：
-
-![测试动图](https://github.com/njuzyh/CalabashBrothers/blob/master/finalProject/test.gif?raw=true "葫芦娃")
+![葫芦兄弟](https://github.com/njuzyh/java-2018f-homework/blob/master/Final%20Project/%E5%91%A8%E5%AE%87%E8%88%AA-161220182/finalProject/Calabash.gif?raw=true)
 ```
+```
+ 5. 游戏特色
+ - 基本功能：
+	完成所有要求的基本功能，包括实现战斗记录与回放、增加注解、编写单元测试用例、使用maven进行构建管理等等。
+ - 设计思路：
+	这个游戏一开始想设计成为一款纯粹的弹幕游戏，通过双方射子弹进行躲避攻击。但是最后依然保留了近战，所以两相结合成了现在的版本。
+ - 新的想法：
+   - 首先实现了远程攻击，两方通过远程攻击和近战肉搏两种方式进行战斗，更加添加游戏的趣味性。并且给不同人物增加不同的远程攻击技能，包括葫芦、火球、火焰和水波等，增加人物多样性
+   - 其次实现了背景音乐，一点击开始游戏，葫芦娃原声大碟带你回到童年，享受打怪的快感。
+   - 第三实现了关卡切换，当然这里的关卡主要是指背景切换，主要是图个乐子。
+---
+## 二、实现说明
+### 代码结构
+1. #### package GUI
+
+-   class Main是整个工程项目的入口。
+-   class StagePageController是JavaFX框架，使用FXML Scene Builder工具的一个控制器，用来显示引导页，并且点击开始游戏时加载CalabashWorldController进入游戏。
+-   class CalabashWorldController也是JavaFX框架，使用FXML Scene Builder工具的一个控制器。主要用于处理程序的各种外部事件处理函数以及控制整个游戏的UI刷新。
+-   class Battle是自己定义的一个线程，用于开始游戏后的子线程管理和监测，在 CalabashWorldController中产生，控制各个Creature的运行。
+2. #### package Field
+-   class Position是二维平面坐标，显示具体在平面上的横纵坐标。
+-   class Unit是二维平面的基本组成单位，生物体能够放置在Unit上。T其具有一系列接口可以判断该对象上是否存在生物体、移除对象上的生物体、放置生物体等。
+-   class BattleMap实现一个由Unit组成的二维平面地图。可以对该对象的某一个具体坐标单元进行操作，可以显示GUI平面和输出普通平面。
+- class BattleField是主体类，用于实现双方在其上战斗的相关功能，同时又包含记录和重放的相关接口，并且负责向javafx主线程发送UI刷新信号。
+3. #### package Creature
+-   class Creature是所有生物体的基类，能够在地图上行走战斗。并且实现了Runnable接口，用于多线程的运行。
+-   class Sprite继承于Creature。
+-   class CalabashBoy继承于Creature。
+-   class Grandpa继承于Creature。
+-   class Snake继承于Creature。
+-   class Scorpion继承于Creature。
+-   class Bullet继承Creature 。新添加的类，作为子弹同样包括Creature的部分属性，所以将其加入子类中。
+-   class CalabashBrother是七个CalabashBoy的集合，为了实现排序等功能，所以将其构造进一个类。
+-   class Heroes为英雄阵营的集合，包括爷爷和七个葫芦娃。
+-   class Monsters为妖怪阵营集合，包括蛇精、蝎子精和一群小喽啰，喽啰数可根据阵型进行调整。
+-   Enum Color为颜色，用于构造葫芦娃时进行标记。
+-   Interface Queueup为实现摆出阵型的接口，每个阵营类有这个接口，可以摆出相应的阵型。
+
+![Creature](https://github.com/njuzyh/java-2018f-homework/blob/master/Final%20Project/%E5%91%A8%E5%AE%87%E8%88%AA-161220182/finalProject/Creature.PNG?raw=true)
+4.  #### package Formation
+-   class Formation是一个抽象类，并具有抽象接口用于排列阵型。
+-   class Changshe继承了Formation类，具体实现了长蛇阵法。
+-   class Fangyuan继承了Formation类，具体实现了方圆阵法。
+-   class Fengshi继承了Formation类，具体实现了锋矢阵法。
+-   class Chonge继承了Formation类，具体实现了冲轭阵法。
+-   class Heyi继承了Formation类，具体实现了鹤翼阵法。
+-   class Yanxing继承了Formation类，具体实现了雁行阵法。
+-   class Yanyue继承了Formation类，具体实现了偃月阵法。
+-   class Yulin继承了Formation类，具体实现了鱼鳞阵法。
+
+![Formation](https://github.com/njuzyh/java-2018f-homework/blob/master/Final%20Project/%E5%91%A8%E5%AE%87%E8%88%AA-161220182/finalProject/Formation.PNG?raw=true)
+#### package Music
+-   class MusicPlayer使用AudioClip进行音乐读取和播放，并设置循环播放。
+#### package XML
+-   class XMLFormat定义了xml文件的基本结构，用于以后实现读写。
+-   class FileReader继承XMLFormat类，定义了一些接口，用于BattleField进行文件读取重放。
+-   class FileWriter继承XMLFormat类，定义了一些接口，用于BattleField进行文件记录。
+
+![XMLUML](https://lh3.googleusercontent.com/Ity5aKhyI7Vo0azoNETgbKEEM9eOETfnHgemWCIGSna242DwdY4XkwM4JgxkU_HQXsWw-xgN3Tg "XML")
+### 功能实现
+####  阵型排列
+-   用户可以通过菜单栏中的按钮布置阵型。用户点击按钮后通过按钮的触发事件处理函数，将生物体排列成相应的阵型。妖精和葫芦娃阵型可以单独排队。
+#### 战斗功能
+-   CalabashWorldController类中有一个成员BattleField newbattle包含了游戏所有的二维空间和生物体们。
+-   当用户按下空格后， CalabashWorldController类中的键盘事件处理函数捕捉到该事件，然后通过调用Battle类运行所有的生物体线程。
+-   在生物体子线程void run()函数里，生物体会执行while循环，条件自己是否已经死亡或者胜利，在其中会检测对手是否全部死亡，若死亡则胜利。
+-   通过Battle类中定义CountDown计数器进行判断，在其不为零时，Battle线程阻塞，直至某一方全部死亡所有生物体子线程结束运行，计数器归零。
+-   子线程运行时会在findEnemy和nearstEnemy函数中寻找离该生物体曼哈顿距离最接近的一个敌人作为进攻目标。然后通过执行move函数生成路径进行移动，移动过程中会调用remoteAttack生成Bullet子线程进行远程攻击，如和目标距离只为1，会调用fight函数对附近的敌人进行攻击。
+-   如果生物体已经死亡，进程立即结束，该生物体会以墓碑的形式继续存在，直到其他人到达该地，墓碑被清除。
+-   最终子线程全部结束，Battle线程通知javafx游戏结束，跳出弹框通知哪一方胜利。
+#### 线程安全的实现
+
+-   首先当每个生物线程进行移动和攻击时，对方法加上synchronized锁，对BattleField对象加上锁，这样可以保证一个生物体进程在进行移动和攻击时独享BattleField资源，避免多个生物站上同一位置、多个生物同时杀死某个生物等问题。
+-   其次在子线程移动攻击死亡时，会向BattleFiled调用相关函数进行UI刷新。本来我以为可以直接在子线程中进行UI的修改，但在javafx中，并不允许。所有UI的修改必须在Javafx主线程中，所以我才用Platform.runlater将其发送给主线程，进行UI的刷新，这样确实会导致画面的卡顿，但符合了实验的要求，并且更加深入了解了多线程UI刷新。
+#### 记录回放
+-  在记录文件的选择上我考虑到XML文件结构更加清晰，读写也比较方便，所以使用它。同时使用dom4j的支持，方便代码的编写。
+-  当游戏开始时，首先选择记录文件的路径，默认游戏目录，创建xml文件，以及FileWriter对象。并且传给BattleField。然后启动所有生物体线程，当生物线程进行move和attack等操作时，BattleField会调用addRecord使得FileWriter对象记录对应的位置状态信息，然后写入对应的xml文件，实现了记录文件的功能与Creature类的功能分离。
+-   进行录像回放时，首先选择打开记录文件，然后将程序游戏控制器的FileReader会根据其创建对象，此时回放考虑到其结果的固定性，我采用Timeline进行动画的实现，由FileReader每隔固定时间读取一轮各个生物的状态进行显示生成动画效果。
+-   注意：每个生物体线程是并发进行的，运行时其move等操作都是顺序进行的，记录写入也是固定顺序。回放按照记录写入的顺序依次重现可以实现。
+---
+### 单元测试
+-   使用了JUnit4对Field，Creature等几个模块的部分方法进行了单元测试，内容简单，不详述。
+![JUnit Test](https://picasaweb.google.com/108775974957125167801/6640990382021848593#6640990388168052674 "JUnitTest")
+---
+### 设计原则
+#### SRP 单一职责原则
+-   在CalabashWorlController里，需要对记录文件和控制子线程运行进行响应，一开始的设计是直接控制器之中里进行文件读写和子线程运行。后来考虑到文件读写的功能和控制子线程运行并不是javafx控制器职责，所以加入了一个XML包和Battle类，XML包中对读写文件操作进行了封装，直接与BattleField进行交互实现读写，而Battle类直接实现控制战斗开始和结束，实现了文件操作、战斗运行和控制器只负责对UI进行响应和刷新功能的分离。
+
+#### OCP 开放封闭原则
+
+- 开放封闭原则是指实体应该对扩展是开放的，对修改是封闭的。即，可扩展，不可修改。应该通过增加代码来扩展功能，而不是修改已经存在的代码。在阵法类的设计体现这条原则：所有阵型抽象成一个abstract class Formation，然后具体的阵型通过继续抽象类Formation，实现其中的抽象方法来获得不同的阵型，但接口保证统一。而生物只能通过Queueup接口选择阵型，不能改变阵型内的具体内容。
+
+#### LSP LISKOV替换法则
+
+-   Creature类的子类CalabashBoy、Sprite、Grandpa、Snake和Scorpion都可以替换程序中的Creature类。实际上在后续操作中，都是用ArrayList来表示生物集合。
+
+#### CARP 合成/聚合复用原则
+
+-   二维地图BattleMap是有一组Unit类合成而来。
+-   战场类BattleField类由Creature的子类和BattleMap类聚合而成。
+- Monsters由snake、Scorpion、Sprite等聚合。
+- Heroes由CalabashBrother、Grandpa聚合。
+- CalabashBrother由Calabashboy聚合。
+---
+### 注解
+自定义了一个注解类用来标记编作者网站和版本：
+
+    @Documented  
+    @Target(ElementType.TYPE) 
+    @Inherited  
+    @Retention(RetentionPolicy.RUNTIME) 
+    public @interface Author{ 
+		String name() default "Zhou Yuhang";  
+		String website() default "cn.edu.nju"; 
+	    int revision() default 1;   
+	}
+	      
+ 调用：
+ 
+
+    @Author()
+
+## 三、思考总结
+通过这学期的JAVA课学习，我真的收获了很多，对于面向对象不再是空洞的名字，而是真的要去实现“面向对象是对现实世界的刻画”。对于并发等等平时接触很少的技术有了新的认识，我还有IOS要接着去体会，感谢曹老板和余老师一学期的辛勤教导，我真的学会了很多，痛哭流涕，，，不！喜极而泣脸。
+
+>在绝望中寻找希望，生命终将辉煌。——曹老板
 

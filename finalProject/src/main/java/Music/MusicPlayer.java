@@ -3,8 +3,10 @@ package Music;
 import java.io.File;
 import java.net.URISyntaxException;
 
+import Annotation.Author;
 import javafx.scene.media.AudioClip;
 
+@Author()
 public class MusicPlayer {
     public void playMusic() throws URISyntaxException {
         AudioClip ac;

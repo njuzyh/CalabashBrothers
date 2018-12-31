@@ -62,7 +62,8 @@ public class FileReader extends XMLFormat{
                 Element fightingElement = roundElement.element(fighting);
                 if(fightingElement != null) {
                     if (!alive) {
-                        battleField.clearUnit(x);
+                        x.die();
+                        //battleField.clearUnit(x);
                     }
                 }
             }

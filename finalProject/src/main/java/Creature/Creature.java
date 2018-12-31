@@ -1,4 +1,5 @@
 package Creature;
+import Annotation.Author;
 import Field.*;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
+@Author()
 public class Creature implements Runnable{
     protected static int roundNum;
     protected String name;
@@ -25,26 +27,24 @@ public class Creature implements Runnable{
     protected Creature nearestEnemy;
     protected CountDownLatch latch;
     protected int attacknum = 0;
-    protected final BattleField newfield;
+    protected Image aliveimage;
+    protected Image deadimage = new Image("/Image/dead.jpg");
 
     public Creature() {
         this.position = new Position();
         this.alive = true;
-        newfield = null;
     }
 
     public Creature(BattleField field) {
         this.position = new Position();
         this.alive = true;
         this.field = field;
-        newfield = field;
     }
 
     public Creature(int x, int y, BattleField field) {
         this.position = new Position(x, y);
         this.alive = true;
         this.field = field;
-        newfield = field;
     }
 
     public void setRoundNum(int roundNum)
@@ -121,8 +121,14 @@ public class Creature implements Runnable{
     public synchronized void die() {
         this.alive = false;
         field.clearUnit(this);
-        this.image = new Image("/Image/dead.jpg");
+        this.image = deadimage;
         field.displayUnit(this);
+    }
+
+    public void revive()
+    {
+        this.alive = true;
+        this.image = aliveimage;
     }
 
     public void addhp(int t)
@@ -143,23 +149,30 @@ public class Creature implements Runnable{
 
     public synchronized void move(Creature c1, Creature c2, Random random)
     {
+        BattleMap battleMap = field.getbattleMap();
         int dx = c2.getX() - c1.getX();
         int dy = c2.getY() - c1.getY();
         int x1, y1;
         x1 = (dx == 0) ? 0 : dx / Math.abs(dx);
         y1 = (dy == 0) ? 0 : dy / Math.abs(dy);
-        field.clearUnit(c1);
-        BattleMap battleMap = field.getbattleMap();
         if (x1 != 0 && battleMap.isEmpty(c1.getX() + x1, c1.getY())) {
+            field.clearUnit(c1);
             c1.setPosition(c1.getX() + x1, c1.getY());
+            field.displayUnit(c1);
         } else if (y1 != 0 && battleMap.isEmpty(c1.getX(), c1.getY() + y1)) {
+            field.clearUnit(c1);
             c1.setPosition(c1.getX(), c1.getY() + y1);
+            field.displayUnit(c1);
         } else {
             if (c1.getX() > 0 && battleMap.isEmpty(c1.getX() - 1, c1.getY())) {
+                field.clearUnit(c1);
                 c1.setPosition(c1.getX() - 1, c1.getY());
+                field.displayUnit(c1);
             }
             if (c1.getX() < 19 && battleMap.isEmpty(c1.getX() + 1, c1.getY())) {
+                field.clearUnit(c1);
                 c1.setPosition(c1.getX() + 1, c1.getY());
+                field.displayUnit(c1);
             }
         }
         attacknum++;
@@ -167,7 +180,6 @@ public class Creature implements Runnable{
             remoteAttack();
             attacknum = 0;
         }
-        field.displayUnit(c1);
         field.updateCreatures();
         field.addRecord(roundNum);
         roundNum++;
@@ -278,13 +290,11 @@ public class Creature implements Runnable{
                 Random random = new Random();
                 int mindistance = findNearestEnemy();
                 if (mindistance == 1) {
-                    assert newfield != null;
-                    synchronized (newfield) {
+                    synchronized (field) {
                         fight(this, nearestEnemy, random);
                     }
                 } else {
-                    assert newfield != null;
-                    synchronized (newfield) {
+                    synchronized (field) {
                         move(this, nearestEnemy, random);
                     }
                 }
