@@ -1,0 +1,13 @@
+.root {
+    -fx-background-image: url("/Image/startpage.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+.button {
+    -fx-text-fill: #d8d8d8;
+    -fx-background-image: url('/Image/button.png');
+    -fx-background-radius: 25;
+    -fx-background-size: 228pt;
+    -fx-background-position: center;
+}

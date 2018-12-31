@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CalabashWorldController">
+    <children>
+        <MenuBar layoutX="8.0" layoutY="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem fx:id="StartGame" mnemonicParsing="false" onAction="#StartGame" text="start" />
+                        <MenuItem fx:id="OpenFile" mnemonicParsing="false" onAction="#openlog" text="open" />
+                        <MenuItem fx:id="SaveLog" mnemonicParsing="false" onAction="#savelog" text="save" />
+                        <MenuItem fx:id="Restart" mnemonicParsing="false" onAction="#restart" text="restart" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="妖怪阵型">
+                    <items>
+                        <MenuItem id="FormationChangShe" fx:id="CalabashFormationChangShe" mnemonicParsing="false" onAction="#MonsterChangShe" text="长蛇" />
+                        <MenuItem id="FormationChongE" fx:id="CalabashFormationChongE" mnemonicParsing="false" onAction="#MonsterChongE" text="冲轭" />
+                        <MenuItem id="FormationFangYuan" fx:id="CalabashFormationFangYuan" mnemonicParsing="false" onAction="#MonsterFangYuan" text="方圆" />
+                        <MenuItem id="FormationFengShi" fx:id="CalabashFormationFengShi" mnemonicParsing="false" onAction="#MonsterFengShi" text="锋矢" />
+                        <MenuItem id="FormationHeYi" fx:id="CalabashFormationHeYi" mnemonicParsing="false" onAction="#MonsterHeYi" text="鹤翼" />
+                        <MenuItem id="FormationYanXing" fx:id="CalabashFormationYanXing" mnemonicParsing="false" onAction="#MonsterYanXing" text="雁行" />
+                        <MenuItem id="FormationYanYue" fx:id="CalabashFormationYanYue" mnemonicParsing="false" onAction="#MonsterYanYue" text="偃月" />
+                        <MenuItem id="FormationYuLin" fx:id="CalabashFormationYuLin" mnemonicParsing="false" onAction="#MonsterYuLin" text="鱼鳞" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="葫芦娃阵型">
+                    <items>
+                        <MenuItem id="FormationChangShe" fx:id="MonsterFormationChangShe" mnemonicParsing="false" onAction="#HeroChangShe" text="长蛇" />
+                        <MenuItem id="FormationChongE" fx:id="MonsterFormationChongE" mnemonicParsing="false" onAction="#HeroChongE" text="冲轭" />
+                        <MenuItem id="FormationFangYuan" fx:id="MonsterFormationFangYuan" mnemonicParsing="false" onAction="#HeroFangYuan" text="方圆" />
+                        <MenuItem id="FormationFengShi" fx:id="MonsterFormationFengShi" mnemonicParsing="false" onAction="#HeroFengShi" text="锋矢" />
+                        <MenuItem id="FormationHeYi" fx:id="MonsterFormationHeYi" mnemonicParsing="false" onAction="#HeroHeYi" text="鹤翼" />
+                        <MenuItem id="FormationYanXing" fx:id="MonsterFormationYanXing" mnemonicParsing="false" onAction="#HeroYanXing" text="雁行" />
+                        <MenuItem id="FormationYanYue" fx:id="MonsterFormationYanYue" mnemonicParsing="false" onAction="#HeroYanYue" text="偃月" />
+                        <MenuItem id="FormationYuLin" fx:id="MonsterFormationYuLin" mnemonicParsing="false" onAction="#HeroYuLin" text="鱼鳞" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="关卡">
+                    <items>
+                        <MenuItem fx:id="scene1" mnemonicParsing="false" onAction="#select1" text="葫芦山" />
+                        <MenuItem fx:id="scene2" mnemonicParsing="false" onAction="#select2" text="爷爷山" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem fx:id="About" mnemonicParsing="false" onAction="#about" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <ImageView fx:id="background" fitHeight="630.0" fitWidth="600.0" pickOnBounds="true" AnchorPane.topAnchor="20.0">
+            <image>
+                <Image url="@/Image/background.jpg" />
+            </image>
+        </ImageView>
+        <GridPane fx:id="gridPane" prefHeight="630.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Canvas fx:id="canvas" focusTraversable="true" height="630.0" onKeyReleased="#HandleKeyPressed" onMouseClicked="#canvasDragDetect" width="600.0" GridPane.columnSpan="1" GridPane.rowIndex="10" GridPane.rowSpan="1" />
+                <Canvas fx:id="BulletCanvas" focusTraversable="true" height="630.0" width="600.0" GridPane.columnSpan="1" GridPane.rowIndex="10" GridPane.rowSpan="1" />
+            </children>
+        </GridPane>
+    </children>
+</AnchorPane>
